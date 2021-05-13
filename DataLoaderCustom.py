@@ -8,17 +8,19 @@ from torch.utils.data import Dataset, DataLoader
 
 class PatientDiffLoader(Dataset):
     # UNTESTED !!!
-    def __init__(self, path):
+    def __init__(self, path, toBin = False, toLog = False):
         self.data = Data.fromFilePath(path)
+        self.toBin = toBin
+        self.toLog = toLog
+
     def __len__(self):
         return len(self.data.patient)
 
-    def __getitem__(self, idx, mode="same_patient", toBin = False, toLog = False):
+    def __getitem__(self, idx):
         '''geting new data
 
         Args:
             idx ([type]): index for patient 1
-            mode (str, optional): for future expension. Defaults to "same_patient".
             toBin (bool, optional): binarize output. Defaults to False.
             toLog (bool, optional): apply log to output. Defaults to False.
 
@@ -60,10 +62,10 @@ class PatientDiffLoader(Dataset):
             data_2 = self.data.get_patient( random_same )
 
 
-        if toBin:
+        if self.toBin:
             data_1 = (data_1 != -1)
             data_2 = (data_2 != -1)
-        elif toLog:
+        elif self.toLog:
             data_1_mask = (data_1 == -1)
             data_2_mask = (data_2 == -1)
 
