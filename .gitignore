@@ -2,3 +2,4 @@
 **.mzXML
 **.xml
 __pycache__/**
+venv
