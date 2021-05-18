@@ -3,3 +3,6 @@
 **.xml
 __pycache__/**
 venv
+*.csv
+*.npy
+*.json
